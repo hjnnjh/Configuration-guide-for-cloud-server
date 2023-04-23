@@ -6,27 +6,23 @@
 
 ## 配置SSH密钥登录
 
-1. 目前使用的云服务器为腾讯云的轻量应用服务器，首先在腾讯云的在控制台中创建SSH密钥
+- 目前使用的云服务器为腾讯云的轻量应用服务器，首先在腾讯云的在控制台中创建SSH密钥
 
-   ![image-20230422220238066](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304222202159.png)
+![image-20230422220238066](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304222202159.png)
 
-2. 将实例关闭之后，将密钥绑定至实例
+- 将实例关闭之后，将密钥绑定至实例
 
-   ![image-20230422220423576](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304222204616.png)
+![image-20230422220423576](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304222204616.png)
 
-3. 配置本机~/.ssh/config文件
+- 配置本机~/.ssh/config文件
 
-4. 登录服务器，修改ssh相关配置（如关闭密码登录）
+- 登录服务器，修改ssh相关配置（如关闭密码登录）
 
-   ```shell
-   sudo vim /etc/ssh/sshd_config
-   ```
+```shell
+sudo vim /etc/ssh/sshd_config
+```
 
-   将`PasswordAuthentication`修改为`no`
-
-5. 完成ssh登录配置
-
-   ![image-20230422221616689](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304222216710.png)
+将`PasswordAuthentication`修改为`no`
 
 ## 安装zsh, oh-my-zsh, powerlevel10k
 
@@ -146,7 +142,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
-- 修改`.zshrc`中的`plugins`
+- 修改`~/.zshrc`中的`plugins`选项
 
 ```apl
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting z sudo)
@@ -158,7 +154,7 @@ source ~/.zshrc
 
 ### 安装[powerlevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
 
-- 安装以下字体
+- 首先安装以下字体（在`p10k`GitHub主页可下载）
 
   ![image-20230423001846694](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304230018746.png)
 
@@ -168,7 +164,7 @@ sudo apt install fontconfig
 sudo fc-cache -f -v
 ```
 
-- 安装powerlevel10k
+- 安装`powerlevel10k`
 
 
 ```shell
@@ -178,12 +174,12 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 - Set `ZSH_THEME="powerlevel10k/powerlevel10k"` in `~/.zshrc`.
 
 ```shell
-source .zshrc
+source ~/.zshrc
 ```
 
 - 按照提示完成配置，效果如下：
 
-![image-20230423004357128](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304230043163.png)
+![WechatIMG253](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304231252714.png)
 
 ## 配置[frp](https://github.com/fatedier/frp)内网穿透工具
 
@@ -193,7 +189,7 @@ source .zshrc
 
 ```shell
 [common]
-bind_port = 7000  # 用于内网穿透的主要端口，ssh等都是走这个端口
+bind_port = 7000  # 用于frp服务端与客户端通信的端口
 vhost_http_port = 8889  # web服务端口，我主要用来配置远程jupyter notebook
 ```
 
