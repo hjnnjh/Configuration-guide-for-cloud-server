@@ -14,15 +14,13 @@
 
 ![image-20230422220423576](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304222204616.png)
 
-- 配置本机~/.ssh/config文件
+- 配置本机`~/.ssh/config`文件
 
-- 登录服务器，修改ssh相关配置（如关闭密码登录）
+- 登录服务器，修改ssh相关配置（如关闭密码登录：将`PasswordAuthentication`修改为`no`）
 
 ```shell
 sudo vim /etc/ssh/sshd_config
 ```
-
-将`PasswordAuthentication`修改为`no`
 
 ## 安装zsh, oh-my-zsh, powerlevel10k
 
@@ -40,7 +38,7 @@ sudo apt install zsh
 passwd ubuntu
 ```
 
-修改默认终端为zsh
+修改默认终端为zsh（不用加`sudo`，因为需要修改的是当前用户的默认终端，需要输入当前用户的密码）
 
 ```shell
 chsh -s /bin/zsh
@@ -55,7 +53,7 @@ sudo apt update
 sudo apt install git
 ```
 
-配置clash
+安装`clash`（dddd）
 
 - 下载对应的安装包：https://github.com/Dreamacro/clash/releases
 
@@ -79,7 +77,7 @@ sudo apt install git
   clash
   ```
 
-  如有必要，需手动上传`Country.mmdb`文件
+  有几率遇到`Country.mmdb`下载不了的情况，需手动上传`Country.mmdb`文件
 
 - 配置`$HOME/.config/clash/config.yaml`文件
 
@@ -123,13 +121,13 @@ Successfully!'"
 setproxy
 ```
 
-安装oh-my-zsh
+安装`oh-my-zsh`
 
 ```shell
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-- 配置`.zshrc`中的oh-my-zsh的插件
+- 配置oh-my-zsh的插件
 - 安装`zsh-autosuggestions`
 
 ```shell
