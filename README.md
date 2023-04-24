@@ -26,7 +26,7 @@ sudo vim /etc/ssh/sshd_config
 
 ###  安装zsh
 
-下载zsh
+下载`zsh`
 
 ```shell
 sudo apt install zsh
@@ -38,7 +38,7 @@ sudo apt install zsh
 passwd ubuntu
 ```
 
-修改默认终端为zsh（不用加`sudo`，因为需要修改的是当前用户的默认终端，需要输入当前用户的密码）
+修改默认终端为`zsh`（不用加`sudo`，因为需要修改的是当前用户的默认终端，需要输入当前用户的密码）
 
 ```shell
 chsh -s /bin/zsh
@@ -46,7 +46,7 @@ chsh -s /bin/zsh
 
 ### 安装并配置[oh-my-zsh](https://ohmyz.sh/)
 
-安装git
+安装`git`
 
 ```shell
 sudo apt update
@@ -106,7 +106,7 @@ sudo systemctl start clash
 sudo systemctl enable clash
 ```
 
-- 配置`.zshrc`，为zsh配置代理
+- 在`~/.zshrc`中添加以下内容，为`zsh`配置代理
 
 ```shell
 # proxy settings
@@ -127,7 +127,7 @@ setproxy
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-- 配置oh-my-zsh的插件
+- 配置`oh-my-zsh`的插件
 - 安装`zsh-autosuggestions`
 
 ```shell
@@ -188,7 +188,7 @@ source ~/.zshrc
 ```shell
 [common]
 bind_port = 7000  # 用于frp服务端与客户端通信的端口
-vhost_http_port = 8889  # web服务端口，我主要用来配置远程jupyter notebook
+vhost_http_port = 8889  # web服务端口，我主要用来远程连接jupyter notebook
 ```
 
 - 配置`systemd`服务`frps.service`
