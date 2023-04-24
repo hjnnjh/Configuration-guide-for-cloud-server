@@ -115,7 +115,7 @@ alias unsetproxy="unset http_proxy; unset https_proxy; echo 'Unset Proxy
 Successfully!'"
 ```
 
-- 打开终端代理
+- 打开终端代理 (用完`clash`记得把`systemd clash`服务关掉噢，吃云服务器的内存和带宽)
 
 ```shell
 setproxy
