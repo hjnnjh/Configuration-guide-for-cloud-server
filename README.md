@@ -157,7 +157,8 @@ source ~/.zshrc
   ![image-20230423001846694](https://gitee.com/zephyrushjnnjh/image-repo/raw/master/img/202304230018746.png)
 
 ```shell
-sudo mv MesloLGS* /usr/share/fonts/
+sudo mkdir /usr/share/fonts/truetype/meslolgs
+sudo mv MesloLGS* /usr/share/fonts/truetype/meslolgs/
 sudo apt install fontconfig
 sudo fc-cache -f -v
 ```
