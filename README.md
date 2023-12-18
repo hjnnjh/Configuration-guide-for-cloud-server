@@ -46,13 +46,6 @@ chsh -s /bin/zsh
 
 ### 安装并配置[oh-my-zsh](https://ohmyz.sh/)
 
-安装`git`
-
-```shell
-sudo apt update
-sudo apt install git
-```
-
 安装`clash`（dddd）
 
 - 下载对应的安装包：https://github.com/Dreamacro/clash/releases
@@ -81,7 +74,7 @@ sudo apt install git
 
 - 配置`$HOME/.config/clash/config.yaml`文件
 
-- 配置`systemd`服务
+- 配置`systemd`服务(`/lib/systemd/system/clash.service`)
 
 ```shell
 [Unit]
@@ -105,17 +98,31 @@ sudo systemctl daemon-reload
 sudo systemctl start clash
 sudo systemctl enable clash
 ```
+安装`git`
 
-- 在`~/.zshrc`中添加以下内容，为`zsh`配置代理
+```shell
+sudo apt update
+sudo apt install git
+```
+
+为`git`配置代理，新建`~/.gitconfig`文件，添加以下内容，在国内这一步是必须的，如果不配置，后面安装`oh-my-zsh`时会遇到`git clone`失败的情况。
+
+```shell
+[http]
+	proxy = http://127.0.0.1:7890
+[https]
+	proxy = http://127.0.0.1:7890
+```
+
+在`~/.zshrc`中添加以下内容，为`zsh`配置代理
 
 ```shell
 # proxy settings
 alias setproxy="export http_proxy=http://127.0.0.1:7890; export https_proxy=http://127.0.0.1:7890; echo 'Set Proxy Successfully!'"
-alias unsetproxy="unset http_proxy; unset https_proxy; echo 'Unset Proxy
-Successfully!'"
+alias unsetproxy="unset http_proxy; unset https_proxy; echo 'Unset Proxy Successfully!'"
 ```
 
-- 打开终端代理 (用完`clash`记得把`systemd clash`服务关掉噢，吃云服务器的内存和带宽)
+打开终端代理
 
 ```shell
 setproxy
@@ -192,7 +199,7 @@ bind_port = 7000  # 用于frp服务端与客户端通信的端口
 vhost_http_port = 8889  # web服务端口，我主要用来远程连接jupyter notebook
 ```
 
-- 配置`systemd`服务`frps.service`
+- 配置`systemd`服务`frps.service`(`/lib/systemd/system/frps.service`)
 
 ```shell
 [Unit]
@@ -201,7 +208,7 @@ After=network.target
 
 [Service]
 Type=simple
-User=ubuntu
+User=ubuntu  # 用户名记得修改
 Restart=on-failure
 RestartSec=5s
 ExecStart=/home/ubuntu/frp/frps -c /home/ubuntu/frp/frps.ini  # frps执行文件和配置文件
@@ -213,12 +220,18 @@ WantedBy=multi-user.target
 
 ### 内网服务器配置客户端frpc
 
-- 配置`frpc.ini`文件
+- 配置`frpc.ini`文件，当使用一台云服务器穿透多台内网机器时，需要在`frpc.ini`文件中添加多个`[xxx]`配置，其中每台内网服务器的`[xxx]`是唯一的，如`[ssh1]`、`[ssh2]`等，用于区分不同的内网机器。
 
 ```shell
 [common]
 server_addr = xxx.xxx.xxx.xxx  # 公网服务器ip
 server_port = 7000
+
+[ssh1]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 22  # 要映射的ssh端口, 需提前在服务器控制台防火墙放行
+remote_port = 6000  # 映射到公网服务器的端口
 
 [jupyter]
 type = http
@@ -226,7 +239,7 @@ local_port = 8889  #要映射的jupyter端口, 需提前在服务器控制台防
 custom_domains = xxx.xxx.xxx.xxx  # 公网服务器ip
 ```
 
-- 配置`systemd`服务`frpc.service`
+- 配置`systemd`服务`frpc.service`( `/lib/systemd/system/frpc.service`)
 
 ```shell
 [Unit]
@@ -235,7 +248,7 @@ After=network.target
 
 [Service]
 Type=simple
-User=nobody
+User=nobody  # 用户名记得修改
 Restart=on-failure
 RestartSec=5s
 ExecStart=/home/ubuntu/frp/frpc -c /home/ubuntu/frp/frpc.ini  # frpc执行文件和配置文件
