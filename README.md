@@ -1,6 +1,5 @@
-
-
-# Configuration-guide-for-cloud-server
+#! https://zhuanlan.zhihu.com/p/672920221
+# 云服务器配置指南（同时适用于Ubuntu系统的电脑或者GPU服务器）
 
 **本指南用于记录一个云服务器实例从购买到完成配置本人需要的一些服务的全过程，以供今后购买新的云服务器实例需要进行配置时参考**。
 
